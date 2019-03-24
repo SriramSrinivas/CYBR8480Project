@@ -22,7 +22,7 @@
 * As a misuser, I want to access all the data collected in elastic search without proper authorization
 
 ## High Level Design
-![Tooltip for visually disabled](./path-to-image-file.imgextension)
+Context Diagram :- Context Diagram.png
 
 ## Component List
 ### Component 1 Name here
