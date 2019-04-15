@@ -24,18 +24,14 @@
 ## High Level Design
 Context Diagram :- Context Diagram.png
 
-## Component List
-### Component 1 Name here
-Component description here
+## Data Collection from Sensor
+### 
+This component will collect data from the device. The app will be running in background and sending information to the service every 1 hour. 
+### Elastic Server
+This component will store all the information collected from the sensor.
 
-#### Sub-component 1.1 name here
-Sub component description here
-
-#### Sub-component 1.2 name here
-Sub component description here
-
-### Component 2 Name here
-Component 2 description here
+### Information Viewing system
+This will be a web layout which will allow users to view their information which was collected from their device sensor.
 
 #### Sub-component 2.1 name here
 Sub component description here
@@ -43,5 +39,7 @@ Sub component description here
 #### Sub-component 2.2 name here
 Sub component description here
 
-
 ### Security analysis
+| Component name | Category of vulnerability | Issue Description | Mitigation |
+|----------------|---------------------------|-------------------|------------|
+|Data Collection from Sensor|Data Theft | Application shouldn't allow any third party to collect the data collected from the sensor | App only stores the information and sends it as a batch to ES, stores in local database using Room |
