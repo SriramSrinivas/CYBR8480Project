@@ -27,19 +27,15 @@ Context Diagram :- Context Diagram.png
 ## Data Collection from Sensor
 ### 
 This component will collect data from the device. The app will be running in background and sending information to the service every 1 hour. 
-### Elastic Server
+### Elastic Search
 This component will store all the information collected from the sensor.
 
 ### Information Viewing system
 This will be a web layout which will allow users to view their information which was collected from their device sensor.
 
-#### Sub-component 2.1 name here
-Sub component description here
-
-#### Sub-component 2.2 name here
-Sub component description here
 
 ### Security analysis
 | Component name | Category of vulnerability | Issue Description | Mitigation |
 |----------------|---------------------------|-------------------|------------|
-|Data Collection from Sensor|Data Theft | Application shouldn't allow any third party to collect the data collected from the sensor | App only stores the information and sends it as a batch to ES, stores in local database using Room |
+|Data Collection from Sensor|Data Theft | Application shouldnt allow any third party to collect the data collected from the sensor | App only stores the information and sends it as a batch to ES, stores in local database using Room |
+|Elastic search |Data Theft| Elastic Search data is stored in HCC cloud data can be stolen or misused  |Elastic Search viewing system is secured and all request will be processed via security token  |
