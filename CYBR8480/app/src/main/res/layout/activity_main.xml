@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--<RadioGroup-->
+        <!--android:id="@+id/radioGroup1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignStart="@+id/editText1"-->
+        <!--android:layout_below="@+id/editText1">-->
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/celsius"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:checked="true"-->
+            <!--android:text="@string/celsius" />-->
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/farenheit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/Farenheit" />-->
+    <!--</RadioGroup>-->
+
+    <TextView
+        android:id="@+id/val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup1"
+        android:layout_alignStart="@+id/radioGroup1"
+        android:layout_marginTop="22dp"
+        android:text="@string/celsius" />
+
+    <TextView
+        android:id="@+id/outputValue"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup1"
+
+        android:layout_marginTop="22dp"
+
+        />
+
+
+    <!--<Button-->
+        <!--android:id="@+id/calcButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignStart="@+id/textView1"-->
+        <!--android:layout_below="@+id/textView1"-->
+        <!--android:onClick="onClick"-->
+        <!--android:layout_marginTop="22dp"-->
+        <!--android:text="@string/calc" />-->
+
+</LinearLayout>
