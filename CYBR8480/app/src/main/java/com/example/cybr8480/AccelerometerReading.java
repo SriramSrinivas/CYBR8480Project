@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class AccelerometerReading implements SensorEventListener  {
@@ -39,7 +40,7 @@ public class AccelerometerReading implements SensorEventListener  {
 
 
      @Override
-     public void onSensorChanged (SensorEvent event){
+     public void onSensorChanged (SensorEvent event) {
 
          Sensor mySensor = event.sensor;
 
@@ -49,12 +50,13 @@ public class AccelerometerReading implements SensorEventListener  {
              float z = event.values[2];
 
              output.setText("x=" + x + "y=" + y + "z=" + z);
+             Log.i("acc", Float.toString(x));
 
          }
-
      }
 
-     @Override
+
+    @Override
      public void onAccuracyChanged (Sensor sensor,int accuracy){
 
      }
