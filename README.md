@@ -41,3 +41,12 @@ This will be a web layout which will allow users to view their information which
 |----------------|---------------------------|-------------------|------------|
 |Data Collection from Sensor|Data Theft | Application shouldnt allow any third party to collect the data collected from the sensor | App only stores the information and sends it as a batch to ES, stores in local database using Room |
 |Elastic search |Data Theft| Elastic Search data is stored in HCC cloud data can be stolen or misused  |Elastic Search viewing system is secured and all request will be processed via security token  |
+
+
+# Risk List  
+|Risk name (value)  | Impact     | Likelihood | Description | Mitigation |
+|-------------------|------------|------------|-------------|------------|
+| Malicious popups being inserted into the app / Injection (56) | 8 | 7 | The ad server selected for this application has not been secured and accepts malicious submissions from ad partner networks. | Ensure that any advertisements are filtered or verified before being allowed access.|
+| Information is being stolen from the user/development team (25) | 5 | 5 | The ad server selected for this application has not been secured and allows for user information to be stolen. | Ensure that any advertisements are filtered or verified before being allowed access.|
+| Man-in-the-Middle Attack (21)| 7 | 3 | The user or the development team using insecure Wi-Fi while using the app.| Making a note in the instruction sheet to remind users to encrypt their Wi-Fi. Ensure the developer remembers to only use secure Wi-Fi. | 
+| Bluetooth Sniffing (30)| 6 | 5 | A malicious entity monitors the traffic to and from the android device. | Making a note in the instruction sheet to remind users to turn their Bluetooth connection off when app is not being used. Also to turn the device to a hidden setting if at all possible. |  
