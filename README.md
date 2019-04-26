@@ -50,3 +50,18 @@ This will be a web layout which will allow users to view their information which
 | Information is being stolen from the user/development team (25) | 5 | 5 | The ad server selected for this application has not been secured and allows for user information to be stolen. | Ensure that any advertisements are filtered or verified before being allowed access.|
 | Man-in-the-Middle Attack (21)| 7 | 3 | The user or the development team using insecure Wi-Fi while using the app.| Making a note in the instruction sheet to remind users to encrypt their Wi-Fi. Ensure the developer remembers to only use secure Wi-Fi. | 
 | Bluetooth Sniffing (30)| 6 | 5 | A malicious entity monitors the traffic to and from the android device. | Making a note in the instruction sheet to remind users to turn their Bluetooth connection off when app is not being used. Also to turn the device to a hidden setting if at all possible. |  
+
+
+# Hardware/Software Requirements 
+
+- You will need the following things properly installed on your computer.
+  - Git
+  - Android Emulator
+  - Android Studio
+  - Docker
+  - Django
+  
+ # Installation
+
+* `git clone <repository-url>` this repository
+
