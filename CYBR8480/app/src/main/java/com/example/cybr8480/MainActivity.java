@@ -1,14 +1,19 @@
 package com.example.cybr8480;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.biometrics.BiometricPrompt;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -17,6 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,19 +34,28 @@ import android.hardware.SensorEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private final static int ALL_PERMISSIONS_RESULT = 101;
     private MyService mSensorService;
+    private ESservice eSensorService;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     Intent mServiceIntent;
+    Intent eServiceIntent;
+    private TextView ambientValue, lightValue, pressureValue, humidityValue;
     Context ctx;
     TextView tvLatitude, tvLongitude, tvTime;
     ArrayList<String> permissions = new ArrayList<>();
@@ -59,6 +74,8 @@ private static  String[] INITIAL_PERMS={
 };
 
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,10 +83,12 @@ private static  String[] INITIAL_PERMS={
         setContentView(R.layout.activity_main);
         ctx = this;
         mSensorService = new MyService(getCtx());
+        eSensorService= new ESservice(getCtx());
         mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
-
-        permissions.add(ACCESS_FINE_LOCATION);
-        permissions.add(ACCESS_COARSE_LOCATION);
+        eServiceIntent= new Intent(getCtx(), eSensorService.getClass());
+//
+//        permissions.add(ACCESS_FINE_LOCATION);
+//        permissions.add(ACCESS_COARSE_LOCATION);
         if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED
         && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED){
             Toast.makeText(this,"BBBB",Toast.LENGTH_LONG).show();
@@ -82,8 +101,13 @@ private static  String[] INITIAL_PERMS={
         permissionsToRequest = findUnAskedPermissions(permissions);
         if (!isMyServiceRunning(mSensorService.getClass())) {
             startService(mServiceIntent);
+
         }
 
+        if (!isMyServiceRunning(eSensorService.getClass())) {
+            startService(eServiceIntent);
+
+        }
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -94,7 +118,28 @@ private static  String[] INITIAL_PERMS={
         }
 
 
-        getDataFromAccelerometer();
+        ambientValue = (TextView)findViewById(R.id.ambient_text);
+        TextView output = (TextView) findViewById(R.id.outputValue);
+
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String someValue = intent.getStringExtra("someName");
+                Log.i("l", "onReceive: I am here");
+              ambientValue.setText(someValue);
+            }
+        };
+
+        LocalBroadcastManager.getInstance(this)
+                .registerReceiver(receiver, new IntentFilter("myBroadcastIntent"));
+
+
+        try {
+            getDataFromAccelerometer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         tvLatitude = (TextView) findViewById(R.id.tvLatitude);
         tvLongitude = (TextView) findViewById(R.id.tvLongitude);
@@ -106,6 +151,12 @@ private static  String[] INITIAL_PERMS={
 
 
     }
+
+
+
+
+
+
 
     private void getLocation() {
         locationTrack = new LocationTrack(MainActivity.this);
@@ -164,19 +215,30 @@ private static  String[] INITIAL_PERMS={
         return false;
     }
 
-    private void getDataFromAccelerometer() {
+    private void getDataFromAccelerometer() throws IOException {
         TextView output = (TextView) findViewById(R.id.outputValue);
 
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        String nama = "datasensor.txt";
+        File namafile = new File(nama);
+        FileOutputStream fos = openFileOutput(nama, Context.MODE_PRIVATE);
 
-        AccelerometerReading accl = new AccelerometerReading(output, senAccelerometer, senSensorManager);
+
+
+
+        //use it here.
+
+
+
+        //AccelerometerReading accl = new AccelerometerReading( senAccelerometer, senSensorManager);
 
     }
 
     @Override
     protected void onDestroy() {
         stopService(mServiceIntent);
+        stopService(eServiceIntent);
         Log.i("MAINACT", "onDestroy!");
         super.onDestroy();
 

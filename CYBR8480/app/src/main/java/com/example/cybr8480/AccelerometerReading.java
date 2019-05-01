@@ -1,29 +1,39 @@
 package com.example.cybr8480;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class AccelerometerReading implements SensorEventListener  {
 
-
+     private FileOutputStream outvalue;
     private TextView output;
 
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
+    private SensorEvent event;
 
 
-    public AccelerometerReading(TextView textView, Sensor senAcceleromete, SensorManager senSensorManage)
+    public AccelerometerReading( Sensor senAcceleromete, SensorManager senSensorManage)
     {
-        output=textView;
+      //  output=textView;
        senSensorManager=senSensorManage;
         senAccelerometer=senAcceleromete;
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+//        outvalue=out;
+
 
     }
 
@@ -49,11 +59,20 @@ public class AccelerometerReading implements SensorEventListener  {
              float y = event.values[1];
              float z = event.values[2];
 
-             output.setText("x=" + x + "y=" + y + "z=" + z);
-             Log.i("acc", Float.toString(x));
+//             output.setText("x=" + x + "y=" + y + "z=" + z);
+            // Log.i("acc",("x=" + x + "y=" + y + "z=" + z));
+//             try {
+//                 String value=String.valueOf(x)+","+String.valueOf(y)+","+ String.valueOf(z);
+//               //  outvalue.write(value.getBytes());
+//             } catch (IOException e) {
+//                 e.printStackTrace();
+//             }
+//             Log.i("acc", Float.toString(x) + Float.toString(y)+Float.toString(z));
 
          }
      }
+
+
 
 
     @Override
