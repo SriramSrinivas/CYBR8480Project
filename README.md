@@ -64,4 +64,7 @@ This will be a web layout which will allow users to view their information which
  # Installation
 
 * `git clone <repository-url>` this repository
+Don't use docker as Docker and emulator won't work together.
+
+
 
