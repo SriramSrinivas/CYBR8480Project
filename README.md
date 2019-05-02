@@ -68,9 +68,10 @@ Don't use docker as Docker and emulator won't work together.
 
 ## Download Elastic Search :- https://www.elastic.co/products/elasticsearch
 ## Download Kibana :- https://www.elastic.co/products/kibana
-Once you have downloaded both the software, make sure they are running defualt ports are 9200 and 5601 for elastic search and Kibana respectively.
 
-Onceyou have cloned the app, make sure you have it all setup in the android studio, next launch the app via emulator and soon you can see the logs which prints value from the snsor. 
+Once you have downloaded both the softwares, make sure they are running (if not start both of them from command terminal), default ports are 9200 and 5601 for elastic search and Kibana respectively.
+
+Once you have cloned the app, make sure you have it all setup in the android studio, next launch the app via emulator and soon you can see the logs which prints value from the snsor. 
  Next using the emulator try to change sensor values Temperature, Pressure, Accelerometer and other sensor values. As you change the value you can see the app screen showing the values. Emulator won't show Latitude and Longitude values correctly it will always default to 0.0.
 
 
