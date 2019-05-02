@@ -68,8 +68,11 @@ Don't use docker as Docker and emulator won't work together.
 
 ## Download Elastic Search :- https://www.elastic.co/products/elasticsearch
 ## Download Kibana :- https://www.elastic.co/products/kibana
+(If you have docker running on different machine, you can skip this process and use docker image for Elastic Search and Kibana)
 
 Once you have downloaded both the softwares, make sure they are running (if not start both of them from command terminal), default ports are 9200 and 5601 for elastic search and Kibana respectively.
+
+If you are running Elastic search on different machine you can use (https://ngrok.com/) and forward the port. ngrok will generate a new url. Next update the url in your source code (  String BASE_URL="http://3e325242.ngrok.io/";) Line number 77 in ESservice with the url obtained from ngrok.
 
 Once you have cloned the app, make sure you have it all setup in the android studio, next launch the app via emulator and soon you can see the logs which prints value from the snsor. 
  Next using the emulator try to change sensor values Temperature, Pressure, Accelerometer and other sensor values. As you change the value you can see the app screen showing the values. Emulator won't show Latitude and Longitude values correctly it will always default to 0.0.
